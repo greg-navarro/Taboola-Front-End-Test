@@ -10,10 +10,10 @@ xhr.onload = function() {
 };
 
 var x = document.getElementsByClassName("wikitable sortable");
-x[0]
+// x[0]
 
 
-let words = document.querySelectorAll('.wikitable.sortable.jquery-tablesorter tbody tr td:first-child a');
+let words = commonWordsPage.querySelectorAll('.wikitable.sortable');
 let wordList = []
 
 for (el of words) {
@@ -41,8 +41,10 @@ const isValidWord = (wordIn, commonWordList) => {
 const mapFrequencies = (DOMelement, freqCounter, commonWords) => {
     if ('innerText' in DOMelement) {
         const textContent = DOMelement.innerText.split(' ')
+        console.log("got text")
         for (word of textContent) {
             if (isValidWord(word, commonWords)) {
+                console.log("valid word")
                 if (Object.keys(word)[0] in freqCounter) {
                     freqCounter.word = freqCounter.word + 1
                 } else {

@@ -1,4 +1,4 @@
-
+// access list of common words and make a list from those
 let commonWordsPage = document.createElement('data');
 let xhr = new XMLHttpRequest();
 xhr.open('get', 'https://en.wikipedia.org/wiki/Most_common_words_in_English');
@@ -8,19 +8,20 @@ xhr.onload = function() {
     // console.log(xhr.response);
     commonWordsPage.innerHTML = xhr.response;
 };
-
+// access table cells containing common words
 let words = commonWordsPage.querySelectorAll('.wikitable.sortable tbody tr td:first-child a');
 let wordList = [];
-
+// add each word to list of common words
 for (el of words) {
     let commonWord = el.innerText;
     wordList.push(commonWord);
 }
 
+// add additional common words to list of common words
 let moreCommonWords = ["are", "is", "where", "was"]
 wordList.push(...moreCommonWords)
 
-// define function to check if a word is valid
+// define function to check if a word is valid with respects to requirements
 const isValidWord = (wordIn, commonWordList) => {
     let valid = true;
     if (wordIn.length < 2 || wordIn in commonWordList) {
@@ -32,6 +33,7 @@ const isValidWord = (wordIn, commonWordList) => {
     }
     return true
 } 
+
 
 // define function that will map frequencies to words encountered on the page
 const mapFrequencies = (DOMelement, freqCounter, commonWords) => {
@@ -89,24 +91,13 @@ const getMostUsed = (numberWords, freqCounter) => {
     return orderedWords
 }
 
-//for each element on dom tree, print text and then recurse to childen
-const recurser = (el) => {
-    if (el.innerText) {
-        console.log(el.innerText);
-    }
 
-    for (c of el.children) {
-        recurser(el)
-    }
+const replaceInstances = (text, newtext) => {
+    const regex = new RegExp(text, 'ig')
+    $("body").children().each(function() {           
+        $(this).html($(this).html().replace(regex, newtext));
+    });
 }
-
-// const traverser = (targetWord) => {
-//     for (const el of document.querySelectorAll("body *")) {
-//         for 
-//     }
-// }
-
-
 
 // run program
 // get the body element
@@ -126,21 +117,3 @@ for (const parent of document.querySelectorAll("body *")) {
       }
     }
   }
-
-//   const pattern = /(A1|A)/g;
-//         const replacement = "<span style='color:#FF0000;'>$1</span>";
-//         const subNode = document.createElement("span");
-//         subNode.innerHTML = child.textContent.replace(pattern, replacement);
-//         parent.insertBefore(subNode, child);
-//         parent.removeChild(child);
-
-$("body").children().each(function() {           
-    $(this).html($(this).html().replace("Definitions","fuckstrick"));
-});
-
-const replaceInstances = (text, newtext) => {
-    const regex = new RegExp(text, 'ig')
-    $("body").children().each(function() {           
-        $(this).html($(this).html().replace(regex, newtext));
-    });
-}

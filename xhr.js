@@ -13,7 +13,7 @@ var x = document.getElementsByClassName("wikitable sortable");
 // x[0]
 
 
-let words = commonWordsPage.querySelectorAll('.wikitable.sortable');
+let words = commonWordsPage.querySelectorAll('.wikitable.sortable tbody tr td:first-child a');
 let wordList = []
 
 for (el of words) {

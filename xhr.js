@@ -89,6 +89,23 @@ const getMostUsed = (numberWords, freqCounter) => {
     return orderedWords
 }
 
+//for each element on dom tree, print text and then recurse to childen
+const recurser = (el) => {
+    if (el.innerText) {
+        console.log(el.innerText);
+    }
+
+    for (c of el.children) {
+        recurser(el)
+    }
+}
+
+// const traverser = (targetWord) => {
+//     for (const el of document.querySelectorAll("body *")) {
+//         for 
+//     }
+// }
+
 
 
 // run program
@@ -97,3 +114,33 @@ const getMostUsed = (numberWords, freqCounter) => {
 let testElement = document.querySelectorAll('#firstHeading') // test
 let counter = {}
 counter = mapFrequencies(testElement, counter, wordList)
+
+
+for (const parent of document.querySelectorAll("body *")) {
+    for (const child of parent.childNodes) {
+      if (child.nodeType === Node.TEXT_NODE) {
+        // console.log(child);
+        const pattern = /snapshot/ig;
+        const replacement = "fuckstick";
+        child.textContent.replaceAll(pattern, replacement)
+      }
+    }
+  }
+
+//   const pattern = /(A1|A)/g;
+//         const replacement = "<span style='color:#FF0000;'>$1</span>";
+//         const subNode = document.createElement("span");
+//         subNode.innerHTML = child.textContent.replace(pattern, replacement);
+//         parent.insertBefore(subNode, child);
+//         parent.removeChild(child);
+
+$("body").children().each(function() {           
+    $(this).html($(this).html().replace("Definitions","fuckstrick"));
+});
+
+const replaceInstances = (text, newtext) => {
+    const regex = new RegExp(text, 'ig')
+    $("body").children().each(function() {           
+        $(this).html($(this).html().replace(regex, newtext));
+    });
+}

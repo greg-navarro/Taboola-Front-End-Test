@@ -46,11 +46,12 @@ const mapFrequencies = (commonWords) => {
     const whiteSpace = /(\n|\t|\v|\r|\f)/g
     fullText = fullText.replaceAll(whiteSpace, " ")
     // replace all parenthesis, strip periods and commas
-    const punctuation = /[|?+=_.,"';:\[\]]/g
+    const punctuation = /[|?+=_.,"';:\[\]]/g  
     fullText = fullText.replaceAll(punctuation, " ")
-    fullText = fullText.replaceAll("(", " ")  // TODO add to punctuation regex for all 3
+    fullText = fullText.replaceAll("(", " ")  // TODO add to punctuation regex for all of these
     fullText = fullText.replaceAll(")", " ")
     fullText = fullText.replaceAll("-", " ")
+    fullText = fullText.replaceAll("*", " ")
 
     // split text into an array
     let allWords = fullText.split(/[ ]+/)
@@ -60,18 +61,30 @@ const mapFrequencies = (commonWords) => {
     }
     let foundWords = new Set(allWords)
 
-    for (word of foundWords) {
-        console.log(word)
-        let count = 0
+    // for (let i = 0; i < foundWords.length; i++) {
+    //     word = foundWords[i]
+    //     console.log(word)
+    //     let count = 0
+        // try {
+        //     const searchPattern = new RegExp(word, 'ig')
+        //     count = (fullText.match(searchPattern) || []).length;
+        //     freqCounter[word] = count
+        // } catch(e) {
+        //     foundWords.delete(word)
+        // }
+    //     console.log("We counted the words!!!")  
+    // }
+
+    foundWords.forEach((word) => {
         try {
             const searchPattern = new RegExp(word, 'ig')
             count = (fullText.match(searchPattern) || []).length;
             freqCounter[word] = count
         } catch(e) {
             foundWords.delete(word)
+            console.log("error:", e)
         }
-        console.log("We counted the words!!!")  
-    }
+    })
     
     // for each found word, get it's count and store it in an dictionary
     return freqCounter

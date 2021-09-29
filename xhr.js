@@ -59,7 +59,7 @@ const mapFrequencies = (commonWords) => {
     let fullText = $('body').text()
     // replace all whitespace characters
     const whiteSpace = /(\n|\t|\v|\r|\f)/g
-    fullText = fullText.replaceAll(whiteSpace, " ")
+    fullText = " ".concat(fullText.replaceAll(whiteSpace, " "), " ")
     // replace all parenthesis, strip periods and commas
     const punctuation = /[|?+=_.,"';:\[\]]/g  
     fullText = fullText.replaceAll(punctuation, " ")
@@ -79,6 +79,7 @@ const mapFrequencies = (commonWords) => {
 
     foundWords.forEach((word) => {
         try {
+            const spacedWord = " ".concat(word, " ") // to avoid substring matches
             const searchPattern = new RegExp(word, 'ig')
             count = (fullText.match(searchPattern) || []).length;
             let record = {"word": word, "count": count}

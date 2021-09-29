@@ -115,16 +115,6 @@ const replaceInstances = (text, newtext) => {
 }
 
 
-// for (const parent of document.querySelectorAll("body *")) {
-//     for (const child of parent.childNodes) {
-//       if (child.nodeType === Node.TEXT_NODE) {
-//         // console.log(child);
-//         const pattern = /snapshot/ig;
-//         const replacement = "fuckstick";
-//         child.textContent.replaceAll(pattern, replacement)
-//       }
-//     }
-//   }
 
 // run program
 while (wordList.length < 100) {

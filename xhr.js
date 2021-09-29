@@ -92,47 +92,19 @@ const mapFrequencies = (commonWords) => {
         }
     })
 
-    let orderedWords = freqCounter.sort((a, b) => b.count-a.count)
+    return freqCounter
+}
 
-    let numberElements = 25
-
+// create a list of the top 25 most used words
+const getMostUsed = (numberWords, frequencies) => {
+    let orderedWords = frequencies.sort((a, b) => b.count-a.count)
+    let numberElements = numberWords
     while (orderedWords[numberElements].count === orderedWords[numberElements+1].count) {
         numberElements++
     }
-
     orderedWords.length = numberElements
-    // for each found word, get it's count and store it in an dictionary
     return orderedWords
 }
-
-// // create a list of the top 25 most used words
-// const getMostUsed = (numberWords, freqCounter) => {
-//     let orderedWords = [];
-
-//     for (const key in freqCounter) {
-//         const wordToPlace = key
-//         const wordToPlaceCount = freqCounter[wordToPlace]
-//         if (orderedWords.length === 0)
-//             orderedWords.push(wordData)
-//         else {
-//             let inserted = false
-//             for (let i = 0; i < orderedWords.length && !inserted; i++) {
-//                 const currentWord = orderedWords[i]
-//                 const currentWordCount = freqCounter[currentWord]
-//                 if (wordToPlaceCount >= currentWordCount) {
-//                     orderedWords.splice(i, 0, wordToPlace)
-//                     inserted = true
-//                 } 
-//             }
-//             if (inserted === false) {
-//                 orderedWords.push(wordToPlace)
-//             }
-//         }
-//     }
-    
-//     orderedWords.length = 25
-//     return orderedWords
-// }
 
 
 // const replaceInstances = (text, newtext) => {
@@ -155,4 +127,8 @@ const mapFrequencies = (commonWords) => {
 //   }
 
 // run program
+while (wordList.length < 100) {
+    console.log("waiting for xhr request to be fulfilled")
+}
 let counter = mapFrequencies(wordList)
+let mostCommonWords = getMostUsed(25, counter)

@@ -73,14 +73,10 @@ const mapFrequencies = (commonWords) => {
     })
 
     
-    
+
     // for each found word, get it's count and store it in an dictionary
     return freqCounter
 }
-
-// run program
-let counter = mapFrequencies(wordList)
-
 
 // // create a list of the top 25 most used words
 // const getMostUsed = (numberWords, freqCounter) => {
@@ -130,3 +126,6 @@ let counter = mapFrequencies(wordList)
 //       }
 //     }
 //   }
+
+// run program
+let counter = mapFrequencies(wordList)

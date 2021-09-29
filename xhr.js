@@ -42,15 +42,11 @@ const mapFrequencies = (commonWords) => {
     let foundWords = new Set(allWords) // get rid of duplicate records
     // make an array of objects, each giving data on a word and it's frequency
     foundWords.forEach((word) => {
-        try {
-            // determine the number of times a word appears in the full text
-            let count = allWords.filter(x => x === word).length 
-            // create object, map to array
-            let record = {"word": word, "count": count}
-            freqCounter.push(record)
-        } catch(e) {
-            foundWords.delete(word)
-        }
+        // determine the number of times a word appears in the full text
+        let count = allWords.filter(x => x === word).length 
+        // create object, map to array
+        let record = {"word": word, "count": count}
+        freqCounter.push(record)
     })
 
     return freqCounter

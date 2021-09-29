@@ -53,7 +53,7 @@ const mapFrequencies = (commonWords) => {
 
     // split text into an array
     let allWords = fullText.split(" ")
-    allWords = allWords.filter(word => isValidWord(word, commonWordList))
+    allWords = allWords.filter(word => isValidWord(word, commonWords))
     let foundWords = new Set(allWords)
     // const words = fullText.split(" ")
     // for (sequence of words) {
@@ -62,7 +62,8 @@ const mapFrequencies = (commonWords) => {
     // }
 
     for (word of foundWords) {
-        const searchPattern = new RegExp(word, ig)
+        console.log(word)
+        const searchPattern = new RegExp(word, 'ig')
         let count = (fullText.match(searchPattern) || []).length;
         freqCounter.word = count
     }
@@ -112,9 +113,7 @@ const replaceInstances = (text, newtext) => {
 // run program
 // get the body element
 // let body = querySelector('body');
-let testElement = document.querySelectorAll('#firstHeading') // test
-let counter = {}
-counter = mapFrequencies(testElement, counter, wordList)
+let counter = mapFrequencies(wordList)
 
 
 for (const parent of document.querySelectorAll("body *")) {

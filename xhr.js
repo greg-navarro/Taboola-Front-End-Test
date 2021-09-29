@@ -38,6 +38,16 @@ const isValidWord = (wordIn, commonWordList) => {
         // https://stackoverflow.com/questions/13925454/check-if-string-is-a-punctuation-character
         console.log("has numbers")
         valid = false
+    } else {
+        let index = 0
+        while (index < wordIn.length && valid) {
+            let asciiCode = wordIn.charCodeAt(index)
+            if (asciiCode < 65 || asciiCode > 122) {
+                valid = false
+                console.log("non ascii char at ", index, wordIn, asciiCode)
+            }
+            index++ 
+        }
     }
     return valid
 } 
@@ -45,7 +55,7 @@ const isValidWord = (wordIn, commonWordList) => {
 
 // define function that will map frequencies to words encountered on the page
 const mapFrequencies = (commonWords) => {
-    let freqCounter = {}
+    let freqCounter = []
     let fullText = $('body').text()
     // replace all whitespace characters
     const whiteSpace = /(\n|\t|\v|\r|\f)/g
@@ -60,7 +70,8 @@ const mapFrequencies = (commonWords) => {
 
     // split text into an array
     let allWords = fullText.split(/[ ]+/)
-    allWords = allWords.filter(word => isValidWord(word, commonWords));
+    allWords = allWords.filter(word => isValidWord(word.toLowerCase(), commonWords)).map(word => word.toLowerCase());
+    console.log("Valid words: ", allWords)
     for (let i = 0; i < allWords.length; i++) {
         allWords[i] = allWords[i].trim()
     }
@@ -70,17 +81,20 @@ const mapFrequencies = (commonWords) => {
         try {
             const searchPattern = new RegExp(word, 'ig')
             count = (fullText.match(searchPattern) || []).length;
-            freqCounter[word] = count
+            let record = {"word": word, "count": count}
+            freqCounter.push(record)
+            // freqCounter[word] = count
         } catch(e) {
             foundWords.delete(word)
             console.log("error:", e)
         }
     })
 
-    
+    let orderedWords = freqCounter.sort((a, b) => b.count-a.count)
+    // let orderedWords = Object.values(freqCounter)
 
     // for each found word, get it's count and store it in an dictionary
-    return freqCounter
+    return orderedWords
 }
 
 // // create a list of the top 25 most used words

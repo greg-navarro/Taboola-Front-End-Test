@@ -4,18 +4,19 @@ let xhr = new XMLHttpRequest();
 xhr.open('get', 'https://en.wikipedia.org/wiki/Most_common_words_in_English');
 xhr.send();
 
+let wordList = [];
 xhr.onload = function() {
     // console.log(xhr.response);
     commonWordsPage.innerHTML = xhr.response;
+    // access table cells containing common words
+    let words = commonWordsPage.querySelectorAll('.wikitable.sortable tbody tr td:first-child a');
+    // add each word to list of common words
+    for (el of words) {
+        let commonWord = el.innerText;
+        wordList.push(commonWord);
+    }
 };
-// access table cells containing common words
-let words = commonWordsPage.querySelectorAll('.wikitable.sortable tbody tr td:first-child a');
-let wordList = [];
-// add each word to list of common words
-for (el of words) {
-    let commonWord = el.innerText;
-    wordList.push(commonWord);
-}
+
 
 // add additional common words to list of common words
 let moreCommonWords = ["are", "is", "where", "was"]

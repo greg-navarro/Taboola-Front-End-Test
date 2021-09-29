@@ -27,13 +27,13 @@ wordList.push(...moreCommonWords)
 // define function to check if a word is valid with respects to requirements
 const isValidWord = (wordIn, commonWordList) => {
     let valid = true;
-    // if (wordIn.length < 2 || wordIn in commonWordList) {
-    //     valid = false 
-    // } else if (Number.isInteger(wordIn)) {
-    //     // check if word contains a digit or contains punctuation with regex TODO
-    //     // https://stackoverflow.com/questions/13925454/check-if-string-is-a-punctuation-character
-    //     valid = false
-    // }
+    if (wordIn.length < 2 || wordIn in commonWordList) {
+        valid = false 
+    } else if (/\d/.test(wordIn)) {
+        // check if word contains a digit or contains punctuation with regex TODO
+        // https://stackoverflow.com/questions/13925454/check-if-string-is-a-punctuation-character
+        valid = false
+    }
     return true
 } 
 
@@ -43,17 +43,26 @@ const mapFrequencies = (commonWords) => {
     let freqCounter = {}
     let fullText = $('body').text()
     // replace all whitespace characters
-    const whiteSpace = /(\n|\t)/ig
-    fullText.replaceAll(whiteSpace, " ")
+    const whiteSpace = /(\n|\t|\v|\r|\f)/g
+    fullText = fullText.replaceAll(whiteSpace, " ")
+    // someText = fullText.replace(/(\r\n|\n|\r)/gm, "");
     // replace all parenthesis, strip periods and commas
-    fullText.replaceAll(".", " ")
-    fullText.replaceAll(",", " ")
-    fullText.replaceAll("(", " ")
-    fullText.replaceAll(")", " ")
+    const punctuation = /[|?+=_.,"';:\[\]]/g
+    fullText = fullText.replaceAll(punctuation, " ")
+    // fullText = fullText.replaceAll(".", " ")
+    // fullText = fullText.replaceAll(",", " ")
+    fullText = fullText.replaceAll("(", " ")
+    fullText = fullText.replaceAll(")", " ")
+    fullText = fullText.replaceAll("-", " ")
+    // fullText = fullText.replaceAll("+", " ")
+
 
     // split text into an array
-    let allWords = fullText.split(" ")
-    allWords = allWords.filter(word => isValidWord(word, commonWords))
+    let allWords = fullText.split(/[ ]+/)
+    allWords = allWords.filter(word => isValidWord(word, commonWords));
+    for (let i = 0; i < allWords.length; i++) {
+        allWords[i] = allWords[i].trim()
+    }
     let foundWords = new Set(allWords)
     // const words = fullText.split(" ")
     // for (sequence of words) {

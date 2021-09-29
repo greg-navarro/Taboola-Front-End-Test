@@ -28,15 +28,15 @@ wordList.push(...moreCommonWords)
 const isValidWord = (wordIn, commonWordList) => {
     let valid = true;
     if (wordIn.length < 2) {
-        console.log("short")
+        // console.log("short")
         valid = false
     } else if (commonWordList.includes(wordIn)) {
-        console.log("common")
+        // console.log("common")
         valid = false
     } else if (/\d/.test(wordIn)) {
         // check if word contains a digit or contains punctuation with regex TODO
         // https://stackoverflow.com/questions/13925454/check-if-string-is-a-punctuation-character
-        console.log("has numbers")
+        // console.log("has numbers")
         valid = false
     } else {
         let index = 0
@@ -44,7 +44,7 @@ const isValidWord = (wordIn, commonWordList) => {
             let asciiCode = wordIn.charCodeAt(index)
             if (asciiCode < 65 || asciiCode > 122) {
                 valid = false
-                console.log("non ascii char at ", index, wordIn, asciiCode)
+                // console.log("non ascii char at ", index, wordIn, asciiCode)
             }
             index++ 
         }
@@ -71,7 +71,7 @@ const mapFrequencies = (commonWords) => {
     // split text into an array
     let allWords = fullText.split(/[ ]+/)
     allWords = allWords.filter(word => isValidWord(word.toLowerCase(), commonWords)).map(word => word.toLowerCase());
-    console.log("Valid words: ", allWords)
+    // console.log("Valid words: ", allWords)
     for (let i = 0; i < allWords.length; i++) {
         allWords[i] = allWords[i].trim()
     }
@@ -108,7 +108,9 @@ const getMostUsed = (numberWords, frequencies) => {
 
 
 const replaceInstances = (text, newtext) => {
-    const regex = new RegExp(text, 'ig')
+    const query = "\\b".concat(text, "\\b")
+    console.log(query)
+    const regex = new RegExp(query, 'ig')
     $("body").children().each(function() {           
         $(this).html($(this).html().replace(regex, newtext));
     });
@@ -117,11 +119,6 @@ const replaceInstances = (text, newtext) => {
 
 
 // run program -- after wordList is loaded
-let wait = true
-while (wait) {
-    setTimeout(() => { console.log("waiting for xhr request to be fulfilled"); }, 500);
-    wait = false
-}
 let counter = mapFrequencies(wordList)
 let mostCommonWords = getMostUsed(25, counter)
 

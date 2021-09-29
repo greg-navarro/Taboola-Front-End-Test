@@ -117,9 +117,11 @@ const replaceInstances = (text, newtext) => {
 
 
 // run program -- after wordList is loaded
-// while (wordList.length < 100) {
-//     setTimeout(() => { console.log("waiting for xhr request to be fulfilled"); }, 500);
-// }
+let wait = true
+while (wait) {
+    setTimeout(() => { console.log("waiting for xhr request to be fulfilled"); }, 500);
+    wait = false
+}
 let counter = mapFrequencies(wordList)
 let mostCommonWords = getMostUsed(25, counter)
 

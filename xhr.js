@@ -79,9 +79,10 @@ const mapFrequencies = (commonWords) => {
 
     foundWords.forEach((word) => {
         try {
-            const spacedWord = " ".concat(word, " ") // to avoid substring matches
-            const searchPattern = new RegExp(word, 'ig')
-            count = (fullText.match(searchPattern) || []).length;
+            // const spacedWord = " ".concat(word, " ") // to avoid substring matches
+            // const searchPattern = new RegExp(word, 'ig')
+            // count = (fullText.match(searchPattern) || []).length;
+            let count = allWords.filter(x => x === word).length
             let record = {"word": word, "count": count}
             freqCounter.push(record)
             // freqCounter[word] = count

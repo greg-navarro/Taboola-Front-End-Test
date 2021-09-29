@@ -1,7 +1,7 @@
 // access list of common words and make a list from those
 let commonWordsPage = document.createElement('data');
 let xhr = new XMLHttpRequest();
-xhr.open('get', 'https://en.wikipedia.org/wiki/Most_common_words_in_English');
+xhr.open('get', 'https://en.wikipedia.org/wiki/Most_common_words_in_English', false);
 xhr.send();
 
 let wordList = [];

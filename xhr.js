@@ -28,9 +28,7 @@ const isValidWord = (wordIn, commonWordList) => {
     let valid = true;
     if (wordIn.length < 2) {
         valid = false
-    } else if (commonWordList.includes(wordIn)) {
-        valid = false
-    } else if (/\d/.test(wordIn)) {
+    } else if (commonWordList.includes(wordIn) || /\d/.test(wordIn)) {
         valid = false
     } else {
         let index = 0
@@ -95,7 +93,7 @@ const getMostUsed = (numberWords, frequencies) => {
 
 
 const replaceInstances = (text, newtext) => {
-    const query = "\\b".concat(text, "\\b")
+    const query = "(?<!-)\\b".concat(text, "(?!-)\\b")
     const regex = new RegExp(query, 'ig')
     $("body").children().each(function() {           
         $(this).html($(this).html().replace(regex, newtext));
@@ -109,5 +107,6 @@ let counter = mapFrequencies(wordList)
 let mostCommonWords = getMostUsed(25, counter)
 
 for (let i = 0; i < mostCommonWords.length; i++) {
+    console.log(i + " " + counter[i].word)
     replaceInstances(counter[i].word, counter[i].count)
 }

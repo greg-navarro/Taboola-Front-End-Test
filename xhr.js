@@ -107,12 +107,12 @@ const getMostUsed = (numberWords, frequencies) => {
 }
 
 
-// const replaceInstances = (text, newtext) => {
-//     const regex = new RegExp(text, 'ig')
-//     $("body").children().each(function() {           
-//         $(this).html($(this).html().replace(regex, newtext));
-//     });
-// }
+const replaceInstances = (text, newtext) => {
+    const regex = new RegExp(text, 'ig')
+    $("body").children().each(function() {           
+        $(this).html($(this).html().replace(regex, newtext));
+    });
+}
 
 
 // for (const parent of document.querySelectorAll("body *")) {
@@ -128,7 +128,11 @@ const getMostUsed = (numberWords, frequencies) => {
 
 // run program
 while (wordList.length < 100) {
-    console.log("waiting for xhr request to be fulfilled")
+    setTimeout(() => { console.log("waiting for xhr request to be fulfilled"); }, 500);
 }
 let counter = mapFrequencies(wordList)
 let mostCommonWords = getMostUsed(25, counter)
+
+for (let i = 0; i < mostCommonWords.length; i++) {
+    replaceInstances(counter[i].word, counter[i].count)
+}

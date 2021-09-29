@@ -54,29 +54,38 @@ const mapFrequencies = (commonWords) => {
     fullText = fullText.replaceAll("*", " ")
 
     // split text into an array
-    let allWords = fullText.split(/[ ]+/)
-    allWords = allWords.filter(word => isValidWord(word, commonWords));
-    for (let i = 0; i < allWords.length; i++) {
-        allWords[i] = allWords[i].trim()
-    }
-    let foundWords = new Set(allWords)
+    // let allWords = fullText.split(/[ ]+/)
+    // allWords = allWords.filter(word => isValidWord(word, commonWords));
+    // for (let i = 0; i < allWords.length; i++) {
+    //     allWords[i] = allWords[i].trim()
+    // }
+    // let foundWords = new Set(allWords)
 
-    foundWords.forEach((word) => {
-        try {
-            const searchPattern = new RegExp(word, 'ig')
-            count = (fullText.match(searchPattern) || []).length;
-            freqCounter[word] = count
-        } catch(e) {
-            foundWords.delete(word)
-            console.log("error:", e)
-        }
-    })
+    // foundWords.forEach((word) => {
+    //     try {
+    //         const searchPattern = new RegExp(word, 'ig')
+    //         count = (fullText.match(searchPattern) || []).length;
+    //         freqCounter[word] = count
+    //     } catch(e) {
+    //         foundWords.delete(word)
+    //         console.log("error:", e)
+    //     }
+    // })
 
-    
+    freqCounter = words(fullText)
     
     // for each found word, get it's count and store it in an dictionary
     return freqCounter
 }
+
+function words(str) { 
+    return str.split(" ").reduce(function(count, word) {
+      count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1;
+      
+      return count;
+    }, {});
+}
+
 
 // run program
 let counter = mapFrequencies(wordList)

@@ -82,57 +82,55 @@ const mapFrequencies = (commonWords) => {
     return freqCounter
 }
 
-
-// create a list of the top 25 most used words
-const getMostUsed = (numberWords, freqCounter) => {
-    let orderedWords = [];
-
-    for (const key in freqCounter) {
-        const wordToPlace = key
-        const wordToPlaceCount = freqCounter[wordToPlace]
-        if (orderedWords.length === 0)
-            orderedWords.push(wordData)
-        else {
-            let inserted = false
-            for (let i = 0; i < orderedWords.length && !inserted; i++) {
-                const currentWord = orderedWords[i]
-                const currentWordCount = freqCounter[currentWord]
-                if (wordToPlaceCount >= currentWordCount) {
-                    orderedWords.splice(i, 0, wordToPlace)
-                    inserted = true
-                } 
-            }
-            if (inserted === false) {
-                orderedWords.push(wordToPlace)
-            }
-        }
-    }
-    
-    orderedWords.length = 25
-    return orderedWords
-}
-
-
-const replaceInstances = (text, newtext) => {
-    const regex = new RegExp(text, 'ig')
-    $("body").children().each(function() {           
-        $(this).html($(this).html().replace(regex, newtext));
-    });
-}
-
 // run program
-// get the body element
-// let body = querySelector('body');
 let counter = mapFrequencies(wordList)
 
 
-for (const parent of document.querySelectorAll("body *")) {
-    for (const child of parent.childNodes) {
-      if (child.nodeType === Node.TEXT_NODE) {
-        // console.log(child);
-        const pattern = /snapshot/ig;
-        const replacement = "fuckstick";
-        child.textContent.replaceAll(pattern, replacement)
-      }
-    }
-  }
+// // create a list of the top 25 most used words
+// const getMostUsed = (numberWords, freqCounter) => {
+//     let orderedWords = [];
+
+//     for (const key in freqCounter) {
+//         const wordToPlace = key
+//         const wordToPlaceCount = freqCounter[wordToPlace]
+//         if (orderedWords.length === 0)
+//             orderedWords.push(wordData)
+//         else {
+//             let inserted = false
+//             for (let i = 0; i < orderedWords.length && !inserted; i++) {
+//                 const currentWord = orderedWords[i]
+//                 const currentWordCount = freqCounter[currentWord]
+//                 if (wordToPlaceCount >= currentWordCount) {
+//                     orderedWords.splice(i, 0, wordToPlace)
+//                     inserted = true
+//                 } 
+//             }
+//             if (inserted === false) {
+//                 orderedWords.push(wordToPlace)
+//             }
+//         }
+//     }
+    
+//     orderedWords.length = 25
+//     return orderedWords
+// }
+
+
+// const replaceInstances = (text, newtext) => {
+//     const regex = new RegExp(text, 'ig')
+//     $("body").children().each(function() {           
+//         $(this).html($(this).html().replace(regex, newtext));
+//     });
+// }
+
+
+// for (const parent of document.querySelectorAll("body *")) {
+//     for (const child of parent.childNodes) {
+//       if (child.nodeType === Node.TEXT_NODE) {
+//         // console.log(child);
+//         const pattern = /snapshot/ig;
+//         const replacement = "fuckstick";
+//         child.textContent.replaceAll(pattern, replacement)
+//       }
+//     }
+//   }

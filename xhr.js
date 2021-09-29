@@ -52,12 +52,8 @@ const mapFrequencies = (commonWords) => {
     const whiteSpace = /(\n|\t|\v|\r|\f)/g
     fullText = " ".concat(fullText.replaceAll(whiteSpace, " "), " ")
     // replace all parenthesis, strip periods and commas
-    const punctuation = /[|?+=_.,"';:\[\]]/g  
+    const punctuation = /[?.,"'\[\]\(\)]/g  
     fullText = fullText.replaceAll(punctuation, " ")
-    fullText = fullText.replaceAll("(", " ")  // TODO add to punctuation regex for all of these
-    fullText = fullText.replaceAll(")", " ")
-    fullText = fullText.replaceAll("-", " ")
-    fullText = fullText.replaceAll("*", " ")
 
     // split text into an array
     let allWords = fullText.split(/[ ]+/)

@@ -93,8 +93,14 @@ const mapFrequencies = (commonWords) => {
     })
 
     let orderedWords = freqCounter.sort((a, b) => b.count-a.count)
-    // let orderedWords = Object.values(freqCounter)
 
+    let numberElements = 25
+
+    while (orderedWords[numberElements].count === orderedWords[numberElements+1].count) {
+        numberElements++
+    }
+
+    orderedWords.length = numberElements
     // for each found word, get it's count and store it in an dictionary
     return orderedWords
 }

@@ -27,14 +27,19 @@ wordList.push(...moreCommonWords)
 // define function to check if a word is valid with respects to requirements
 const isValidWord = (wordIn, commonWordList) => {
     let valid = true;
-    if (wordIn.length < 2 || wordIn in commonWordList) {
-        valid = false 
+    if (wordIn.length < 2) {
+        console.log("short")
+        valid = false
+    } else if (commonWordList.includes(wordIn)) {
+        console.log("common")
+        valid = false
     } else if (/\d/.test(wordIn)) {
         // check if word contains a digit or contains punctuation with regex TODO
         // https://stackoverflow.com/questions/13925454/check-if-string-is-a-punctuation-character
+        console.log("has numbers")
         valid = false
     }
-    return true
+    return valid
 } 
 
 

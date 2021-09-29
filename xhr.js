@@ -72,9 +72,15 @@ const mapFrequencies = (commonWords) => {
 
     for (word of foundWords) {
         console.log(word)
-        const searchPattern = new RegExp(word, 'ig')
-        let count = (fullText.match(searchPattern) || []).length;
-        freqCounter.word = count
+        let count = 0
+        try {
+            const searchPattern = new RegExp(word, 'ig')
+            count = (fullText.match(searchPattern) || []).length;
+            freqCounter[word] = count
+        } catch(e) {
+            foundWords.delete(word)
+        }
+        console.log("We counted the words!!!")  
     }
     
     // for each found word, get it's count and store it in an dictionary

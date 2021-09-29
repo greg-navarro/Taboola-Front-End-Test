@@ -59,11 +59,6 @@ const mapFrequencies = (commonWords) => {
         allWords[i] = allWords[i].trim()
     }
     let foundWords = new Set(allWords)
-    // const words = fullText.split(" ")
-    // for (sequence of words) {
-    //     if (isValidWord(sequence))
-    //         foundWords.add(sequence)
-    // }
 
     for (word of foundWords) {
         console.log(word)

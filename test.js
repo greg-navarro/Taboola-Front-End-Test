@@ -22,6 +22,7 @@ const isValidWord = (wordIn, commonWordList) => {
 
 
 // define function that will map frequencies to words encountered on the page
+// the argument commonWords is a list containing strings that should not be included in the map
 const mapFrequencies = (commonWords) => {
     let freqCounter = [] // return value, will contain objects with data for the word and its frequency
     let fullText = $('body').text() // get all text from the page
@@ -86,7 +87,7 @@ xhr.send();
 let wordList = [];
 xhr.onload = function() {
     commonWordsPage.innerHTML = xhr.response;
-    // access table cells containing common words
+    // access table cells containing common words (all 100 of them)
     let words = commonWordsPage.querySelectorAll('.wikitable.sortable tbody tr td:first-child a');
     // add each word to list of common words
     for (el of words) {
@@ -94,9 +95,11 @@ xhr.onload = function() {
         wordList.push(commonWord);
     }
     // add additional common words to list of common words
+    // according to wikipedia, these are not included in the list 
+    // because they are conjugations of the lexeme 'be'
     let moreCommonWords = ["are", "is", "where", "was"]
     wordList.push(...moreCommonWords)
-    // count word frequency
+    // count the frequency of each 
     let counter = mapFrequencies(wordList)
     // get the 25 most used words
     let mostCommonWords = getMostUsed(25, counter)

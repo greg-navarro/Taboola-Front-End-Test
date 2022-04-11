@@ -68,6 +68,16 @@ function mapWordFrequencies (str) {
     return freq;
 }
 
+// given a word 'text', find and replace it with the string 'newText'
+function replaceInstances(text, oldText, newText) {
+    // only replace on word boundaries, and not abutting hyphens
+    const query = "(?<!-)\\b".concat(oldText, "(?!-)\\b");
+    const regex = new RegExp(query, 'ig');
+    const editedText = text.replaceAll(regex, newText);
+    return editedText;
+}
+
+
 // TEST CODE
 const textNodes = getTextNodes(document.getElementById("content"));
 // retrieve text from the list of textNodes, concatenate this into a single string
@@ -84,27 +94,24 @@ let i = 0;
 while (substitutions < maxSubstitutions && i < sortedOccurrenceList.length) {
     const current = sortedOccurrenceList[i];
     const currentWord = current[0];
-    console.log(current);
+    // console.log(current);
     // only make substitutions if the word meets our requirements for validity
     if (isValidWord(currentWord)) {
-        console.log("valid word")
+        // console.log("valid word")
         let wordOccurs = current[1];
-        substitutions++;
         // transverse textNodes from the relevant portion of the page
         // replace each instance of the target word with the number of times it occurs
         for (node of textNodes) {
             const currentNodeValue = node.nodeValue;
-            // console.log(currentNodeValue);
-        //     if (typeof currentValue === "string") {
-        //         // console.log(currentValue);
-        //         const newValue = currentValue.replaceAll(currentWord, wordOccurs);
-        //         node.nodeValue = newValue;
-        //     } else { 
-        //         // console.log("Not a string"); 
-        //     }
+            if (typeof currentNodeValue === "string") {
+                const newNodeValue = replaceInstances(currentNodeValue, currentWord, wordOccurs);
+                node.nodeValue = newNodeValue; 
+                
+            } 
         }
+        substitutions++; // substitutions have been made
     }
-
     i++;
 }
 
+console.log("Script complete :)");

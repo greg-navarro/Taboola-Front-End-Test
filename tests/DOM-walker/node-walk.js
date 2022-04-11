@@ -1,13 +1,10 @@
-let base_node = document.body;
+// create a treewalker with the <body> element as the root node
+// do not filter at this point
+// prints out the node to the console
+const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_ALL, null);
+let currentNode = walker.currentNode;
 
-// breadth first transversal of DOM 
-let unvisitedNodes = [base_node];
-
-while (unvisitedNodes.length > 0) {
-    let currentNode = unvisitedNodes.shift();
-    // add child unvisitedNodes to array of unvisited Nodes
-    if (currentNode.childNodes) 
-        unvisitedNodes = [...unvisitedNodes, ...currentNode.childNodes];
-    // output the name of the node to the console
+while (currentNode) {
     console.log(currentNode);
+    currentNode = walker.nextNode();
 }

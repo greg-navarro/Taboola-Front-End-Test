@@ -62,8 +62,9 @@ function mapWordFrequencies (str) {
 
 // TEST CODE
 const textNodes = getTextNodes(document.getElementById("content"));
-// retrieve text from the list of textNodes
-let textNodeValues = textNodes.map(node => node.nodeValue);
-console.log(textNodeValues)
-const wordFrequencies = mapWordFrequencies(" ".concat(textNodeValues));
-console.log(wordFrequencies)
+// retrieve text from the list of textNodes, concatenate this into a single string
+// measure string frequencies from the values of those textNodes
+const wordFrequencies = mapWordFrequencies(
+    " ".concat(textNodes.map(node => node.nodeValue))
+    );
+console.log(wordFrequencies);

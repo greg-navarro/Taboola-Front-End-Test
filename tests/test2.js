@@ -67,4 +67,6 @@ const textNodes = getTextNodes(document.getElementById("content"));
 const wordFrequencies = mapWordFrequencies(
     " ".concat(textNodes.map(node => node.nodeValue))
     );
-console.log(wordFrequencies);
+// convert wordFreqencies to a sorted array, with the most frequent words ordered before the least
+const sortedOccurrenceList = Object.entries(wordFrequencies).sort((a, b) => b[1] - a[1])
+

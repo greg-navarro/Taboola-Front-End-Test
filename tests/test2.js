@@ -60,7 +60,10 @@ function mapWordFrequencies (str) {
     return freq;
 }
 
-// Test code
+// TEST CODE
 const textNodes = getTextNodes(document.getElementById("content"));
-const wordFrequencies = mapWordFrequencies("the rain in spain falls mainly on the plain");
+// retrieve text from the list of textNodes
+let textNodeValues = textNodes.map(node => node.nodeValue);
+console.log(textNodeValues)
+const wordFrequencies = mapWordFrequencies(" ".concat(textNodeValues));
 console.log(wordFrequencies)

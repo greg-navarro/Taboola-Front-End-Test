@@ -1,6 +1,6 @@
 /* DEFINE FUNCTIONS */
 
-// define function to check if a word is valid with respects to requirements
+// Define function to check if a word is valid with respects to requirements
 function isValidWord (wordIn, commonWordList) {
     let valid = true;
     if (wordIn.length < 2) {
@@ -57,9 +57,10 @@ function mapWordFrequencies (str) {
             freq[lowerCasedWord] = freq[lowerCasedWord] + 1;
         }
     });
-    
     return freq;
 }
 
-const wordFrequencies = mapWordFrequencies(document.getElementById("content"));
-
+// Test code
+const textNodes = getTextNodes(document.getElementById("content"));
+const wordFrequencies = mapWordFrequencies("the rain in spain falls mainly on the plain");
+console.log(wordFrequencies)
